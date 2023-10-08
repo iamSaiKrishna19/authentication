@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Login/Register</title>
+    <style>
+        /* Custom CSS to center the buttons */
+        .centered {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            min-height: 100vh;
+        }
+        body {
+            background: url('back.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container centered">
+    <!-- Login and Registration Buttons -->
+    <div class="row">
+        <div class="col-sm-4">
+            <button type="button" id="loginButton" name="login" class="btn btn-success">Login</button>
+        </div>
+        <div class="col-sm-4">
+            <button type="button" id="registerButton" name="register" class="btn btn-success">Register</button>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript to handle the "Login" button click -->
+<script>
+    document.getElementById("loginButton").addEventListener("click", function() {
+        // Redirect to the login page (login.html)
+        window.location.href = "login.html";
+    });
+
+    // JavaScript to handle the "Register" button click
+    document.getElementById("registerButton").addEventListener("click", function() {
+        // Redirect to the register page (register.html)
+        window.location.href = "register.html";
+    });
+</script>
+
+</body>
+</html>

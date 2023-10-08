@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Home Page</title>
+    <style>
+        /* Add custom CSS to position the logout button in the top right corner */
+        .logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .chat-button {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        body {
+            background: url('back.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="user-profile" id="user-profile">
+        <h4>User: Loading...</h4>
+        <p>Email: Loading...</p>
+    </div>
+
+    <!-- Logout Button -->
+    <button id="logout" class="btn btn-danger logout-button" style="display: none;">Logout</button>
+
+    <!-- Content of your home page goes here -->
+    <h1>Welcome to the Home Page</h1>
+    <p>This is the content of your home page.</p>
+
+    <button class="btn btn-primary chat-button" id="chat-button">Chat</button>
+
+</div>
+</body>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyCp65CU34RHNSKIWhzHB9xLuqAoqzN4KvY",
+      authDomain: "webauth-28725.firebaseapp.com",
+      projectId: "webauth-28725",
+      storageBucket: "webauth-28725.appspot.com",
+      messagingSenderId: "828793893344",
+      appId: "1:828793893344:web:cb5c262f5de541f63ebb85",
+      measurementId: "G-8R749J8TSK"
+      };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // Update the user profile section with the user's details
+            document.getElementById("user-profile").innerHTML = `
+                <h4>User: ${user.displayName || "Anonymous"}</h4>
+                <p>Email: ${user.email || "Unknown"}</p>
+                <p>UserID: ${user.uid}<p>
+            `;
+            document.getElementById("chat-button").addEventListener("click", function() {
+                window.location.href = "chat.html";
+                    });
+            document.getElementById('logout').style.display = 'block';
+
+            
+
+        } else {
+            // Handle the case when the user is not logged in
+            document.getElementById("user-profile").innerHTML = `
+                <h4>User: Not logged in</h4>
+                <p>Email: Not logged in</p>
+            `;
+            document.getElementById('logout').style.display = 'none';
+        }
+    });
+
+    document.getElementById("logout").addEventListener("click", function() {
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            console.log('Sign-out successful.');
+            alert('Sign-out successful.');
+            window.open("index.html", "indexWindow");
+        }).catch((error) => {
+            // An error happened.
+            console.log('An error happened.');
+        });
+    });
+    
+
+   
+
+</script>
+</html>
